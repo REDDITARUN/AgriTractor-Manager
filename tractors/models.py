@@ -10,7 +10,7 @@ IMPLEMENTS_CHOICES = (
   ('4 wheel Trailer', '4 Wheel Trailer'),
 )
 # Create your models here.
-class tractor(models.Model):
+class Tractor(models.Model):
   tractor_id = models.PositiveIntegerField()
   model_name = models.CharField(max_length=50)
   owner_name = models.CharField(max_length=50)

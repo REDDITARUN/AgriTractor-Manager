@@ -4,8 +4,8 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import tractor
-from .forms import tractorForm
+from .models import Tractor
+from .forms import TractorForm
 
 # Create your views here.
 
@@ -13,7 +13,7 @@ from .forms import tractorForm
 @login_required(login_url='login')
 def index(request):
   return render(request, 'tractors/index.html', {
-    'tractors': tractor.objects.all()
+    'tractors': Tractor.objects.all()
   })
 
 def SignupPage(request):
@@ -34,8 +34,8 @@ def SignupPage(request):
 
 
 
-    return render (request,'tractors/index.html', {
-    'tractors': tractor.objects.all()
+    return render (request,'tractors/signup.html', {
+    'tractors': Tractor.objects.all()
   })
 
 def LoginPage(request):
@@ -56,12 +56,12 @@ def LogoutPage(request):
     return redirect('login')
 
 def view_tractor(request, id):
-  tractor = tractor.objects.get(pk=id)
+  tractor = Tractor.objects.get(pk=id)
   return HttpResponseRedirect(reverse('index'))
 
 def add(request):
   if request.method == 'POST':
-    form = tractorForm(request.POST)
+    form = TractorForm(request.POST)
     if form.is_valid():
       new_tractor_id = form.cleaned_data['tractor_id']
       new_model_name = form.cleaned_data['model_name']
@@ -70,7 +70,7 @@ def add(request):
       new_field_Implements = form.cleaned_data['field_Implements']
       new_used_by = form.cleaned_data['used_by']
 
-      new_tractor = tractor(
+      new_tractor = Tractor(
         tractor_id = new_tractor_id,
         model_name = new_model_name,
         owner_name = new_owner_name,
@@ -80,19 +80,21 @@ def add(request):
       )
       new_tractor.save()
       return render(request, 'tractors/add.html', {
-        'form': tractorForm(),
+        'form': TractorForm(),
         'success': True
       })
   else:
-    form = tractorForm()
+    form = TractorForm()
   return render(request, 'tractors/add.html', {
-    'form': tractorForm()
+    'form': TractorForm()
   })
+
+
 
 def edit(request, id):
   if request.method == 'POST':
-    tractor = tractor.objects.get(pk=id)
-    form = tractorForm(request.POST, instance=tractor)
+    tractor = Tractor.objects.get(pk=id)
+    form = TractorForm(request.POST, instance=tractor)
     if form.is_valid():
       form.save()
       return render(request, 'tractors/edit.html', {
@@ -100,14 +102,14 @@ def edit(request, id):
         'success': True
       })
   else:
-    tractor = tractor.objects.get(pk=id)
-    form = tractorForm(instance=tractor)
+    tractor = Tractor.objects.get(pk=id)
+    form = TractorForm(instance=tractor)
   return render(request, 'tractors/edit.html', {
     'form': form
   })
 
 def delete(request, id):
   if request.method == 'POST':
-    tractor = tractor.objects.get(pk=id)
+    tractor = Tractor.objects.get(pk=id)
     tractor.delete()
   return HttpResponseRedirect(reverse('index'))

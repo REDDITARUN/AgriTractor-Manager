@@ -1,11 +1,11 @@
 from django import forms 
-from .models import tractor
+from .models import Tractor
 
 
 
-class tractorForm(forms.ModelForm):
+class TractorForm(forms.ModelForm):
   class Meta:
-    model = tractor
+    model = Tractor
     fields = ['tractor_id', 'model_name', 'owner_name', 'email', 'field_Implements', 'used_by']
     labels = {
       'tractor_id': 'Tractor Number', 

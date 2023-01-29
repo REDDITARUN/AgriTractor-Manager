@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import tractor
+from .models import Tractor
 
 # Register your models here.
-admin.site.register(tractor)
+admin.site.register(Tractor)
