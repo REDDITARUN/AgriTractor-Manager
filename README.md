@@ -1,4 +1,4 @@
-# Farmer Tractor Management System (Assignment Prototype)
+# Farmer Tractor Management System 
 
 This is a Farmer Tractor Management system built using **Django 4**, **HTML 5**, **CSS 3**, and **Bootstrap 5**.
 
@@ -84,11 +84,4 @@ From the **root** directory run:
 python manage.py runserver
 ```
 
-## View the application
 
-Go to http://127.0.0.1:8000/ to view the application.
-
-
-## Copyright and License
-
-Copyright © 2022 Bob's Programming Academy. Code released under the MIT license.
